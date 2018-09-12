@@ -21,12 +21,16 @@ describe '#starts_with_consonant?' do
   end
   it 'classifies true cases [10 points]' , points: 10 do
     expect(starts_with_consonant?('v')).to be_truthy, "'v' is a consonant"
+    expect(starts_with_consonant?('your')).to be_truthy, "'y' is a consonant"
+    expect(starts_with_consonant?('r98$$')).to be_truthy, "'r' is a consonant"
     %w[v vest Veeee crypt].each do |string|
       expect(starts_with_consonant?(string)).to be_truthy, "Incorrect results for input: \"#{string}\""
     end
   end
   it 'classifies false cases [10 points]' , points: 10 do
     expect(starts_with_consonant?('a')).to be_falsy, "'a' is not a consonant"
+    expect(starts_with_consonant?('error')).to be_falsy, "'e' is not a consonant"
+    expect(starts_with_consonant?('43nn')).to be_falsy, "'4' is not a consonant"
     %w[asdfgh Unix].each do |string|
       expect(starts_with_consonant?(string)).to be_falsy, "Incorrect results for input: \"#{string}\""
     end
@@ -54,5 +58,7 @@ describe '#binary_multiple_of_4?' do
   it 'rejects invalid binary numbers [10 points]' , points: 10 do
     expect(binary_multiple_of_4?('a100')).to be_falsy, "'a100' is not a valid binary number!"
     expect(binary_multiple_of_4?('')).to be_falsy, 'The empty string is not a valid binary number!'
+    expect(binary_multiple_of_4?('1001@#$')).to be_falsy, "'1001@#$' is not a valid binary number!"
+    expect(binary_multiple_of_4?('0102313')).to be_falsy, "'0102313' is not a valid binary number!"
   end
 end

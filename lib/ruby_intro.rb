@@ -51,27 +51,35 @@ end
 
 # Matches words that start with a consonant
 def starts_with_consonant? s
-  /(?=^[^aeiouAEIOU])(?=^[[:alpha:]])/.match?(s)
+  /^[^\W\daeiouAEIOU_]/.match?(s)
 end
 
 # determines if the binary number is a multiple of 4
 def binary_multiple_of_4? s
-  if s.empty? || /[^0|^1]/.match?(s)
-      return false
+  if /^(0|1)+$/.match?(s)
+    return s.to_i(2) % 4 == 0
   end
-  
-  return s.to_i(10) % 4 == 0
 end
 
 # Part 3
 
 class BookInStock
-  attr_accessor :isbn, :price
+  attr_reader :isbn, :price
   def initialize(isbn, price)
     raise ArgumentError, 'isbn is empty' if isbn.empty?
     raise ArgumentError, 'price was less than or equal to 0' if price <= 0
 
     @isbn = isbn
+    @price = price
+  end
+  
+  def isbn=(isbn)
+    raise ArgumentError, 'isbn is empty' if isbn.empty?
+    @isbn = isbn
+  end
+  
+  def price=(price)
+    raise ArgumentError, 'price was less than or equal to 0' if price <= 0
     @price = price
   end
   
